@@ -2,7 +2,8 @@ import React from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {sendNewMessageActionCreator, sendMessageActionCreator} from '../../redux/state'
+import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from "../../redux/dialogsReducer";
+
 
 const Dialogs = ({data: {dialogs, messages, newMessage}, dispatch}) => {
 
@@ -10,7 +11,7 @@ const Dialogs = ({data: {dialogs, messages, newMessage}, dispatch}) => {
 
     let saveCurrentMessage = () => {
         let textMessage = newMessageTextarea.current.value;
-        let action = sendNewMessageActionCreator(textMessage)
+        let action = updateNewMessageBodyActionCreator(textMessage)
         dispatch(action)
     }
 

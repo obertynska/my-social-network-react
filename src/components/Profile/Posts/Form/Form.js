@@ -1,6 +1,7 @@
 import s from './Form.module.css'
 import React from 'react'
-import {getNewPostCurrentMessageActionCreator, addPostActionCreator} from '../../../../redux/state'
+import {addPostActionCreator, updateNewPostCurrentMessageActionCreator} from "../../../../redux/profileReducer";
+
 
 const Form = ({dispatch, newPostCurrentMessage}) => {
 
@@ -8,7 +9,7 @@ const Form = ({dispatch, newPostCurrentMessage}) => {
 
     let getNewPostCurrentMessage = () => {
         let postMessage = newPostTextArea.current.value;
-        let action = getNewPostCurrentMessageActionCreator(postMessage)
+        let action = updateNewPostCurrentMessageActionCreator(postMessage)
         dispatch(action)
     }
 
