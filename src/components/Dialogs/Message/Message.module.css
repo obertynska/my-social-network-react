@@ -1,0 +1,37 @@
+.message {
+    display: grid;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 7px;
+    margin-bottom: 10px;
+    grid-template-areas:
+            "avatar name time"
+            ". message .";
+    grid-template-columns: 1fr 7fr 1fr;
+
+}
+.userAvatar{
+    grid-area: avatar;
+}
+
+.userAvatar img{
+    display: inline-block;
+    background-color: #524f4e;
+    width: 40px;
+    height:40px;
+    border-radius: 50%;
+}
+
+.userName{
+    grid-area: name;
+    text-align: left;
+}
+
+.messageText{
+    grid-area: message;
+    text-align: left;
+}
+.messagetime{
+    grid-area: time;
+    text-align: end;
+}

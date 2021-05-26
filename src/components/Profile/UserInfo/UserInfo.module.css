@@ -1,0 +1,21 @@
+.user_info{
+    display: grid;
+    /*grid-template-columns: 1fr 2fr;*/
+    align-items: center;
+    justify-items: center;
+    margin-top: -150px;
+}
+
+
+.user_info__img img{
+    width: 225px;
+    height: 225px;
+    border: 15px solid #fff;
+    border-radius: 50%;
+}
+
+.user_info__name{
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}

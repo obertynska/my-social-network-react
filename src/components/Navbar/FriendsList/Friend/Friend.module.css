@@ -1,0 +1,16 @@
+.friend__img {
+    display: inline-block;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    transition: all .3s;
+}
+
+.friend_name {
+    text-align: center;
+}
+
+.friend:hover .friend__img{
+    cursor: pointer;
+    border-color: #541E3F;
+    transform: scale(1.1);
+}

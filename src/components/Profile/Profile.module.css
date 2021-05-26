@@ -1,0 +1,13 @@
+.content__image {
+    width: 100%;
+    height: 200px;
+    background: url("https://bluoo.digital/wp-content/uploads/2020/10/outstanding-social-media-campaigns-5f60d3e4bb13b.png") no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.user_info{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+}

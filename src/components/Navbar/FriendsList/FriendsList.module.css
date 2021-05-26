@@ -1,0 +1,43 @@
+.friends_wrapper {
+    margin: 10px auto;
+    background-color: #ECF3FF;
+    border-radius: 7px;
+    padding: 15px;
+    box-shadow: 5px 5px 15px -6px rgb(0 0 0 / 75%);
+    -webkit-box-shadow: 5px 5px 15px -6px rgb(0 0 0 / 75%);
+    -moz-box-shadow: 5px 5px 15px -6px rgba(0, 0, 0, 0.75);
+}
+
+.friends_list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 15px;
+    margin-top: 15px;
+}
+
+.friends_heading {
+    padding-bottom: 5px;
+    font-size: 21px;
+    cursor: pointer;
+}
+
+.friends_link.current {
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+
+}
+
+.friends_link.current::before {
+    content: "-";
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.friends_link.current::after {
+    content: "-";
+    position: absolute;
+    right: 0;
+    top: 0;
+}

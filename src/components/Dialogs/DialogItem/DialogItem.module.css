@@ -1,0 +1,48 @@
+.dialog {
+    display: grid;
+    padding: 15px;
+    grid-template-areas:
+            "avatar name date"
+            ". lastmessage .";
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 2fr 1fr;
+   transition: all .3s;
+}
+
+.dialog:hover{
+    cursor: pointer;
+}
+
+.dialog.active {
+    background: url("/src/images/Vector_5.png") no-repeat;
+    background-size: cover;
+    color: #ff4040;
+    border-radius: 7px;
+
+}
+
+.userAvatar{
+    grid-area: avatar;
+}
+
+.userAvatar img{
+    display: inline-block;
+    background-color: #524f4e;
+    width: 40px;
+    height:40px;
+    border-radius: 50%;
+}
+
+.userName{
+    grid-area: name;
+    text-align: left;
+}
+
+.dialog_date{
+    grid-area: date;
+    text-align: end;
+}
+.lastMessage{
+    grid-area: lastmessage;
+}
+
