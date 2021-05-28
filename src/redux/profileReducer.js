@@ -40,12 +40,12 @@ const profileReducer = (state = initialState, action) => {
             }
             state.posts.push(newPost)
             state.newPostCurrentMessage = ''
-            return state;
+            return {...state};
         case UPDATE_NEW_POST_CURRENT_MESSAGE:
             state.newPostCurrentMessage = action.message
-            return state;
+            return {...state};
         default :
-            return state;
+            return {...state};
     }
 }
 

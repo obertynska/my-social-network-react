@@ -2,7 +2,7 @@ import s from './FriendsList.module.css'
 import Friend from "./Friend/Friend";
 import {NavLink} from "react-router-dom"
 
-const FriendsList = ({data : {friendsList, friendsCount}}) => {
+const FriendsList = ({friendsList, friendsCount}) => {
 
     return (
         <div className={s.friends_wrapper}>

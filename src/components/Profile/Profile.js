@@ -3,7 +3,7 @@ import UserInfo from "./UserInfo/UserInfo";
 import PostsContainer from "./Posts/PostsContainer";
 
 
-const Profile = ({store}) => {
+const Profile = () => {
 
     return (
         <div className={s.content}>
@@ -12,7 +12,7 @@ const Profile = ({store}) => {
                      alt="contentImg"/>*/}
             </div>
             <UserInfo/>
-            <PostsContainer store={store}/>
+            <PostsContainer/>
         </div>
     )
 }

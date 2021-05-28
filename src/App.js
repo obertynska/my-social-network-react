@@ -10,20 +10,18 @@ import {
 } from "react-router-dom";
 
 
-
-
-function App({state: {navBarData, dialogsData}, dispatch, store }){
+function App(){
 
     return (
         <Router>
             <div className='app-wrapper'>
                 <Header/>
-                <Navbar store={store}/>
+                <Navbar/>
                 <div className="app-wrapper__content">
                     <Route exact path='/profile'
-                           render={() => <Profile store={store}/>}/>
+                           render={() => <Profile/>}/>
                     <Route exact path='/dialogs'
-                           render={() => <DialogsContainer store={store}/>}/>
+                           render={() => <DialogsContainer/>}/>
                 </div>
             </div>
         </Router>

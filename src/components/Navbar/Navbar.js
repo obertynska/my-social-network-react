@@ -1,10 +1,8 @@
 import s from './Navbar.module.css'
 import {NavLink} from "react-router-dom"
-import FriendsList from "./FriendsList/FriendsList";
+import FriendsListContainer from "./FriendsList/FriendsListContainer";
 
-const Navbar = ({store}) => {
-
-    let state = store.getState().navBarData;
+const Navbar = () => {
 
       return (
         <nav className={s.nav_bar}>
@@ -25,9 +23,11 @@ const Navbar = ({store}) => {
                     <NavLink to="/">Settings <img src="/setting.png" alt="setting" className={s.settings_img}/></NavLink>
                 </li>
             </ul>
-            <FriendsList data={state}/>
+            <FriendsListContainer/>
+
         </nav>
     )
 }
+
 
 export default Navbar
