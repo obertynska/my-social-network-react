@@ -2,22 +2,19 @@ import React from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from "../../redux/dialogsReducer";
 
 
-const Dialogs = ({data: {dialogs, messages, newMessage}, dispatch}) => {
+const Dialogs = ({saveCurrentMessage, sendMessage, dialogs, messages, newMessage}) => {
 
     let newMessageTextarea = React.createRef()
 
-    let saveCurrentMessage = () => {
+    let getCurrentMessage = () => {
         let textMessage = newMessageTextarea.current.value;
-        let action = updateNewMessageBodyActionCreator(textMessage)
-        dispatch(action)
+        saveCurrentMessage(textMessage)
     }
 
-    let sendMessage = () => {
-        let action = sendMessageActionCreator()
-        dispatch(action)
+    let onSendMessage = () => {
+        sendMessage()
     }
 
 
@@ -44,8 +41,9 @@ const Dialogs = ({data: {dialogs, messages, newMessage}, dispatch}) => {
                     <img src="/ira.png" alt="avatar" className={s.userAvatar}/>
 
                     <form className={s.newMessage} onSubmit={e => e.preventDefault()}>
-                        <textarea name="new_message" id="new_message" placeholder="Write a message..." ref={newMessageTextarea} onChange={saveCurrentMessage} value={newMessage}></textarea>
-                        <button onClick={sendMessage}>Send</button>
+                        <textarea name="new_message" id="new_message" placeholder="Write a message..."
+                                  ref={newMessageTextarea} onChange={getCurrentMessage} value={newMessage}></textarea>
+                        <button onClick={onSendMessage}>Send</button>
                     </form>
                 </div>
             </div>

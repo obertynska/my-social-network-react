@@ -1,21 +1,17 @@
 import s from './Form.module.css'
 import React from 'react'
-import {addPostActionCreator, updateNewPostCurrentMessageActionCreator} from "../../../../redux/profileReducer";
 
-
-const Form = ({dispatch, newPostCurrentMessage}) => {
+const Form = ({updateNewPostCurrentMessage, addNewPost, newPostCurrentMessage}) => {
 
     let newPostTextArea = React.createRef();
 
     let getNewPostCurrentMessage = () => {
         let postMessage = newPostTextArea.current.value;
-        let action = updateNewPostCurrentMessageActionCreator(postMessage)
-        dispatch(action)
+        updateNewPostCurrentMessage(postMessage)
     }
 
-    let addNewPost = () => {
-        let action = addPostActionCreator()
-        dispatch(action)
+    let onAddNewPost = () => {
+        addNewPost()
     }
 
     return (
@@ -23,7 +19,7 @@ const Form = ({dispatch, newPostCurrentMessage}) => {
             <textarea name="new_post" id="new_post" value={newPostCurrentMessage} placeholder='Hi, how are you ?'
                       ref={newPostTextArea}
                       onChange={getNewPostCurrentMessage}></textarea>
-            <button className={s.floating_button} onClick={addNewPost} type='button'>publish!</button>
+            <button className={s.floating_button} onClick={onAddNewPost} type='button'>publish!</button>
         </form>
     )
 }

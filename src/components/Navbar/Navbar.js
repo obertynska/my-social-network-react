@@ -2,7 +2,9 @@ import s from './Navbar.module.css'
 import {NavLink} from "react-router-dom"
 import FriendsList from "./FriendsList/FriendsList";
 
-const Navbar = ({data}) => {
+const Navbar = ({store}) => {
+
+    let state = store.getState().navBarData;
 
       return (
         <nav className={s.nav_bar}>
@@ -23,7 +25,7 @@ const Navbar = ({data}) => {
                     <NavLink to="/">Settings <img src="/setting.png" alt="setting" className={s.settings_img}/></NavLink>
                 </li>
             </ul>
-            <FriendsList data={data}/>
+            <FriendsList data={state}/>
         </nav>
     )
 }

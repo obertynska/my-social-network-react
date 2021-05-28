@@ -1,7 +1,34 @@
 const ADD_POST = 'ADD_POST',
     UPDATE_NEW_POST_CURRENT_MESSAGE = 'UPDATE_NEW_POST_CURRENT_MESSAGE'
 
-const profileReducer = (state, action) => {
+let initialState = {
+    posts: [
+        {
+            id: 1,
+            message: 'hello! it is my first post',
+            date: '15 May, 12:55',
+            userName: 'Iryna O',
+            likes: 55
+        },
+        {
+            id: 2,
+            message: 'second post',
+            date: '16 May, 12:56',
+            userName: 'Iryna O',
+            likes: 5
+        },
+        {
+            id: 3,
+            message: '3d post',
+            date: '17 May, 12:57',
+            userName: 'Iryna O',
+            likes: 10
+        }
+    ],
+    newPostCurrentMessage: ''
+}
+
+const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {

@@ -1,9 +1,9 @@
 import s from './Profile.module.css'
-import Posts from "./Posts/Posts";
 import UserInfo from "./UserInfo/UserInfo";
+import PostsContainer from "./Posts/PostsContainer";
 
 
-const Profile = ({data: {posts, newPostCurrentMessage}, dispatch}) => {
+const Profile = ({store}) => {
 
     return (
         <div className={s.content}>
@@ -12,7 +12,7 @@ const Profile = ({data: {posts, newPostCurrentMessage}, dispatch}) => {
                      alt="contentImg"/>*/}
             </div>
             <UserInfo/>
-            <Posts posts={posts} dispatch={dispatch} newPostCurrentMessage={newPostCurrentMessage}/>
+            <PostsContainer store={store}/>
         </div>
     )
 }

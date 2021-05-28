@@ -1,7 +1,47 @@
 const SEND_MESSAGE = 'SEND_MESSAGE',
     UPDATE_NEW_CURRENT_MESSAGE = ' UPDATE_NEW_CURRENT_MESSAGE'
 
-const dialogsReducer = (state, action) => {
+let initialState = {
+    dialogs: [
+        {
+            id: 1,
+            name: 'ira',
+            message: 'nice!',
+            date: '12:55',
+            isActive: false
+        },
+        {
+            id: 2,
+            name: 'Aliona',
+            message: 'hi, sister!',
+            date: '12:54',
+            isActive: true
+        }
+    ],
+    messages: [
+        {
+            id: 1,
+            name: 'ira',
+            message: 'hello!',
+            date: '12:55'
+        },
+        {
+            id: 2,
+            name: 'Alex',
+            message: 'hi, how are you?',
+            date: '12:54'
+        },
+        {
+            id: 3,
+            name: 'ira',
+            message: 'nice!',
+            date: '12:55'
+        }
+    ],
+    newMessage: ''
+}
+
+const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case SEND_MESSAGE:
             const newMessage = {
