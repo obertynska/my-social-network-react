@@ -29,7 +29,7 @@ let initialState = {
 }
 
 const navbarReducer = (state = initialState, action) => {
-    return {...state}
+    return state
 }
 
 export default navbarReducer

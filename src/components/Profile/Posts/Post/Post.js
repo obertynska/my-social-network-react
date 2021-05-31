@@ -1,9 +1,10 @@
 import s from './Post.module.css'
 
-const Post = ({date, postText, likesCount, userName}) => {
+const Post = ({date, postText, likesCount, userName, id, removePost}) => {
 
     return (
-        <div className={s.post_item}>
+        <div className={s.post_item} >
+
             <div className={s.post_item_header}>
                 <div className={s.userAvatar}>
                     <img src="/ira.png" alt="avatar"/>
@@ -12,6 +13,7 @@ const Post = ({date, postText, likesCount, userName}) => {
                     <div className={s.userName}>{userName}</div>
                     <div>{date} </div>
                 </div>
+                <span onClick={()=>removePost(id)} className={s.removeBtn}><img src="/remove.png" alt="remove"/></span>
             </div>
             <div className="post_item_text">{postText} </div>
             <div className={s.likes_block}>

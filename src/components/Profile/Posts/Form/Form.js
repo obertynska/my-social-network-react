@@ -16,6 +16,7 @@ const Form = ({updateNewPostCurrentMessage, addNewPost, newPostCurrentMessage}) 
 
     return (
         <form className={s.new_post}>
+
             <textarea name="new_post" id="new_post" value={newPostCurrentMessage} placeholder='Hi, how are you ?'
                       ref={newPostTextArea}
                       onChange={getNewPostCurrentMessage}></textarea>

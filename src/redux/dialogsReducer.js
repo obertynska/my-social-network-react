@@ -48,16 +48,22 @@ const dialogsReducer = (state = initialState, action) => {
                 id: 4,
                 name: 'ira',
                 message: state.newMessage,
-                date: '18:22'
+                date: '18:22'            }
+
+            return {
+                ...state,
+                messages: [...state.messages, newMessage],
+                newMessage: ''
             }
-            state.messages.push(newMessage)
-            state.newMessage = ''
-            return {...state};
-        case UPDATE_NEW_CURRENT_MESSAGE:
-            state.newMessage = action.message
-            return {...state};
+
+        case UPDATE_NEW_CURRENT_MESSAGE: {
+            return {
+                ...state,
+                newMessage: action.message
+            }
+        }
         default:
-            return {...state}
+            return state
     }
 
 

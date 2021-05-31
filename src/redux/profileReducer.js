@@ -1,5 +1,6 @@
 const ADD_POST = 'ADD_POST',
-    UPDATE_NEW_POST_CURRENT_MESSAGE = 'UPDATE_NEW_POST_CURRENT_MESSAGE'
+    UPDATE_NEW_POST_CURRENT_MESSAGE = 'UPDATE_NEW_POST_CURRENT_MESSAGE',
+    REMOVE_POST = 'REMOVE_POST'
 
 let initialState = {
     posts: [
@@ -38,14 +39,26 @@ const profileReducer = (state = initialState, action) => {
                 userName: 'Iryna O',
                 likes: 150
             }
-            state.posts.push(newPost)
-            state.newPostCurrentMessage = ''
-            return {...state};
+
+            return {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostCurrentMessage: ''
+            }
+
         case UPDATE_NEW_POST_CURRENT_MESSAGE:
-            state.newPostCurrentMessage = action.message
-            return {...state};
+            return {
+                ...state,
+                newPostCurrentMessage: action.message
+            }
+
+        case REMOVE_POST:
+            return {
+                ...state,
+                posts: state["posts"].filter(post => post.id !== action.removedId)
+            }
         default :
-            return {...state};
+            return state;
     }
 }
 
@@ -54,6 +67,10 @@ export const addPostActionCreator = () => ({type: ADD_POST})
 export const updateNewPostCurrentMessageActionCreator = (postMessage) => ({
     type: UPDATE_NEW_POST_CURRENT_MESSAGE,
     message: postMessage
+})
+export const removePostActionCreator = (removedId) => ({
+    type: REMOVE_POST,
+    removedId: removedId
 })
 
 export default profileReducer

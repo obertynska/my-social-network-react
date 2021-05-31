@@ -17,7 +17,7 @@
     cursor: pointer;
 }
 
-.likesCount, .like_new{
+.likesCount, .like_new, {
     display: flex;
     align-items: center;
     transition: all .5s ease-in-out;
@@ -88,7 +88,7 @@
 
 .post_item_header{
     display: grid;
-    grid-template-columns: 50px auto;
+    grid-template-columns: 50px auto 20px;
     grid-column-gap: 15px;
 }
 
@@ -97,3 +97,4 @@
     justify-content: space-between;
     margin-top: 10px;
 }
+
