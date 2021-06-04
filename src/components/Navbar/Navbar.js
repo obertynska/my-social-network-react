@@ -20,6 +20,9 @@ const Navbar = () => {
                     <NavLink to="/">Music</NavLink>
                 </li>
                 <li>
+                    <NavLink to="/users" activeClassName={s.current}>All users</NavLink>
+                </li>
+                <li>
                     <NavLink to="/">Settings <img src="/setting.png" alt="setting" className={s.settings_img}/></NavLink>
                 </li>
             </ul>

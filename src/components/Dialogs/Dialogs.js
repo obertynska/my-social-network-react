@@ -4,13 +4,13 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 
 
-const Dialogs = ({saveCurrentMessage, sendMessage, dialogs, messages, newMessage}) => {
+const Dialogs = ({updateNewMessageBody, sendMessage, dialogs, messages, newMessage}) => {
 
     let newMessageTextarea = React.createRef()
 
     let getCurrentMessage = () => {
         let textMessage = newMessageTextarea.current.value;
-        saveCurrentMessage(textMessage)
+        updateNewMessageBody(textMessage)
     }
 
     let onSendMessage = () => {

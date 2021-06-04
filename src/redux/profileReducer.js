@@ -1,6 +1,8 @@
 const ADD_POST = 'ADD_POST',
     UPDATE_NEW_POST_CURRENT_MESSAGE = 'UPDATE_NEW_POST_CURRENT_MESSAGE',
-    REMOVE_POST = 'REMOVE_POST'
+    REMOVE_POST = 'REMOVE_POST',
+    SET_USER_PROFILE_INFO = 'SET_USER_PROFILE_INFO',
+    TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 let initialState = {
     posts: [
@@ -26,10 +28,13 @@ let initialState = {
             likes: 10
         }
     ],
-    newPostCurrentMessage: ''
+    newPostCurrentMessage: '',
+    isFetching: false,
+    userProfileInfo: null
 }
 
 const profileReducer = (state = initialState, action) => {
+
     switch (action.type) {
         case ADD_POST:
             let newPost = {
@@ -57,20 +62,44 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 posts: state["posts"].filter(post => post.id !== action.removedId)
             }
+        case TOGGLE_IS_FETCHING:
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
+        case SET_USER_PROFILE_INFO:
+            return {
+                ...state,
+                userProfileInfo: {...action.userProfileInfo}
+            }
         default :
             return state;
     }
 }
 
 
-export const addPostActionCreator = () => ({type: ADD_POST})
-export const updateNewPostCurrentMessageActionCreator = (postMessage) => ({
+export const addPost = () => ({type: ADD_POST})
+export const updateNewPostCurrentMessage = (postMessage) => ({
     type: UPDATE_NEW_POST_CURRENT_MESSAGE,
     message: postMessage
 })
-export const removePostActionCreator = (removedId) => ({
+export const removePost = (removedId) => ({
     type: REMOVE_POST,
     removedId: removedId
 })
+
+export const setUserProfileInfo = (userProfileInfo) => {
+    return {
+        type: SET_USER_PROFILE_INFO,
+        userProfileInfo
+    }
+}
+
+export const toggleIsFetching = (isFetching) => {
+    return {
+        type: TOGGLE_IS_FETCHING,
+        isFetching
+    }
+}
 
 export default profileReducer

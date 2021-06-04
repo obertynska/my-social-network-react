@@ -2,16 +2,16 @@ import s from './Profile.module.css'
 import UserInfo from "./UserInfo/UserInfo";
 import PostsContainer from "./Posts/PostsContainer";
 
+import Preloader from "../common/Preloader/Preloader";
 
-const Profile = () => {
+
+const Profile = (props) => {
 
     return (
         <div className={s.content}>
-            <div className={s.content__image}>
-                {/*   <img src="https://bluoo.digital/wp-content/uploads/2020/10/outstanding-social-media-campaigns-5f60d3e4bb13b.png"
-                     alt="contentImg"/>*/}
-            </div>
-            <UserInfo/>
+            {props.isFetching ? <Preloader/> : null}
+            <div className={s.content__image}></div>
+            <UserInfo userInfo={props.userProfileInfo}/>
             <PostsContainer/>
         </div>
     )

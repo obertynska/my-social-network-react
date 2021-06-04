@@ -1,7 +1,8 @@
 import {
-    addPostActionCreator,
-    updateNewPostCurrentMessageActionCreator,
-    removePostActionCreator
+    addPost,
+    removePost,
+    updateNewPostCurrentMessage
+
 } from "../../../redux/profileReducer";
 import Posts from "./Posts";
 
@@ -18,22 +19,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        updateNewPostCurrentMessage: (postMessage) => {
-            let action = updateNewPostCurrentMessageActionCreator(postMessage)
-            dispatch(action)
-        },
-        addNewPost: () => {
-            let action = addPostActionCreator()
-            dispatch(action)
-        },
-        removePost: (removedId) => {
-
-            let action = removePostActionCreator(removedId)
-            dispatch(action)
-        }
-    }
+const mapDispatchToProps = {
+        updateNewPostCurrentMessage,
+        addPost,
+        removePost
 }
 
 const PostsContainer = connect(mapStateToProps, mapDispatchToProps)(Posts)
