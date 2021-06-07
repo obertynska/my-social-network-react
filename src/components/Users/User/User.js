@@ -1,19 +1,29 @@
 import s from './User.module.css'
 import userImage from "../../../images/user.png"
 import {Link} from "react-router-dom";
+import {followAPI} from "../../../API/api";
 
-const User = ({toggleIsFollowed, follow, id, name, imgSmallSrc, showUserProfile}) => {
-
-
+const User = ({toggleIsFollowed, toggleIsFetching, followed, id, name, imgSmallSrc, showUserProfile}) => {
 
     return (
-        <Link to={`/profile/${id}`}>
+
         <div className={s.userItem}>
-            <img src={imgSmallSrc ? imgSmallSrc : userImage} alt="user-image"/>
-         <p>{name}</p>
-            <p onClick={()=> toggleIsFollowed(id)}>{follow ? 'followed' : 'unfollowed'}</p>
+            <Link to={`/profile/${id}`}>
+                <img src={imgSmallSrc ? imgSmallSrc : userImage} alt="user-image"/>
+                <p>{name}</p>
+            </Link>
+            <button onClick={() => {
+                toggleIsFetching(true)
+                followAPI.toggleIsFollowed(id, followed ? 'unfollow' : 'follow')
+                    .then(data => {
+                        if (data.resultCode === 0) {
+                            toggleIsFollowed(id)
+                            toggleIsFetching(false)
+                        }
+                    })
+            }}>{followed ? 'unfollow' : 'follow'}</button>
         </div>
-        </Link>
+
 
     )
 };

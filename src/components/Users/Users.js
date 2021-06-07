@@ -5,6 +5,7 @@ import Preloader from "../common/Preloader/Preloader";
 
 
 const Users = (props) => {
+
     let pagesCount = Math.ceil(props.totalUsersAmount / props.usersPerPage)
 
     let pages = []
@@ -32,8 +33,9 @@ const Users = (props) => {
             {
                 props.usersList.map(user => {
                     return <User id={user.id} key={user.id} name={user.name}
-                                 follow={user.follow} imgSmallSrc={user.photos.small}
+                                 followed={user.followed} imgSmallSrc={user.photos.small}
                                  toggleIsFollowed={props.toggleIsFollowed}
+                                 toggleIsFetching={props.toggleIsFetching}
                                  showUserProfile={props.showUserProfile}
                     />
                 })

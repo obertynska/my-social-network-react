@@ -4,17 +4,18 @@ import {withRouter} from "react-router-dom";
 import Profile from "./Profile";
 import * as axios from "axios";
 import {setUserProfileInfo, toggleIsFetching} from "../../redux/profileReducer";
+import {profileAPI} from "../../API/api";
 
 
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
-        let userid = this.props.match.params.userId ?? 2;
+        let userid = this.props.match.params.userId || this.props.loginedUserId || 2;
 
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userid}`)
-            .then(respose => {
-                this.props.setUserProfileInfo(respose.data)
+        profileAPI.getProfileInfo(userid)
+            .then(data => {
+                this.props.setUserProfileInfo(data)
                 this.props.toggleIsFetching(false)
             })
     }
@@ -34,7 +35,8 @@ const mapStateToProps = (state) => {
     return {
         isFetching: state.profileData.isFetching,
         userProfileInfo: state.profileData.userProfileInfo,
-        showedProfileId: state.usersData.showedProfileId
+        showedProfileId: state.usersData.showedProfileId,
+        loginedUserId: state.authData.userid
     }
 }
 

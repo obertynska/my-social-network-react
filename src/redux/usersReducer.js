@@ -22,14 +22,14 @@ const usersReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case TOGGLE_IS_FOLLOWED :
+
             return {
                 ...state,
                 usersList: state.usersList.map((user) => {
                     if (user.id === action.userId) {
-
                         return {
                             ...user,
-                            follow: !user.follow
+                            followed: !user.followed
                         }
                     }
                     return user
