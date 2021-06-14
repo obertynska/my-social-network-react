@@ -37,6 +37,8 @@ const Users = (props) => {
                                  toggleIsFollowed={props.toggleIsFollowed}
                                  toggleIsFetching={props.toggleIsFetching}
                                  showUserProfile={props.showUserProfile}
+                                 usersAreBeingToggledFollowingStatus={props.usersAreBeingToggledFollowingStatus}
+                                 disableFollowBtn={props.disableFollowBtn}
                     />
                 })
             }

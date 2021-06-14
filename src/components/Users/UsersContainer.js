@@ -4,7 +4,7 @@ import {
     setUsers,
     setTotalUsersAmount,
     paginate,
-    toggleIsFetching, showUserProfile
+    toggleIsFetching, showUserProfile, disableFollowBtn
 } from "../../redux/usersReducer";
 
 import React from "react";
@@ -52,7 +52,8 @@ const mapStateToProps = (state) => {
         usersPerPage: state.usersData.usersPerPage,
         totalUsersAmount: state.usersData.totalUsersAmount,
         currentPage: state.usersData.currentPage,
-        isFetching: state.usersData.isFetching
+        isFetching: state.usersData.isFetching,
+        usersAreBeingToggledFollowingStatus: state.usersData.usersAreBeingToggledFollowingStatus
     }
 }
 
@@ -62,7 +63,8 @@ const actionCreators = {
     setTotalUsersAmount,
     paginate,
     toggleIsFetching,
-    showUserProfile
+    showUserProfile,
+    disableFollowBtn
 }
 
 

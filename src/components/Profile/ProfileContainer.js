@@ -2,7 +2,6 @@ import {connect} from "react-redux";
 import React from "react"
 import {withRouter} from "react-router-dom";
 import Profile from "./Profile";
-import * as axios from "axios";
 import {setUserProfileInfo, toggleIsFetching} from "../../redux/profileReducer";
 import {profileAPI} from "../../API/api";
 
@@ -10,6 +9,7 @@ import {profileAPI} from "../../API/api";
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
+        debugger;
         let userid = this.props.match.params.userId || this.props.loginedUserId || 2;
 
         this.props.toggleIsFetching(true)
