@@ -1,9 +1,9 @@
 import s from './User.module.css'
 import userImage from "../../../images/user.png"
 import {Link} from "react-router-dom";
-import {followAPI} from "../../../API/api";
 
-const User = ({toggleIsFollowed, toggleIsFetching, followed, id, name, imgSmallSrc, disableFollowBtn, usersAreBeingToggledFollowingStatus}) => {
+
+const User = ({toggleIsFollowed, followed, id, name, imgSmallSrc, usersAreBeingToggledFollowingStatus}) => {
 
     return (
         <div className={s.userItem}>
@@ -13,18 +13,7 @@ const User = ({toggleIsFollowed, toggleIsFetching, followed, id, name, imgSmallS
             </Link>
             <button
                 disabled={usersAreBeingToggledFollowingStatus.some(userId => id === userId)}
-                onClick={() => {
-                disableFollowBtn(true, id)
-                toggleIsFetching(true)
-                followAPI.toggleIsFollowed(id, followed ? 'unfollow' : 'follow')
-                    .then(data => {
-                        if (data.resultCode === 0) {
-                            toggleIsFollowed(id)
-                            toggleIsFetching(false)
-                        }
-                        disableFollowBtn(false, id)
-                    })
-            }}>{followed ? 'unfollow' : 'follow'}</button>
+                onClick={() => { toggleIsFollowed (id, followed) }}> {followed ? 'unfollow' : 'follow'}</button>
         </div>
 
 

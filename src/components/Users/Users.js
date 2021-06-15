@@ -34,11 +34,9 @@ const Users = (props) => {
                 props.usersList.map(user => {
                     return <User id={user.id} key={user.id} name={user.name}
                                  followed={user.followed} imgSmallSrc={user.photos.small}
-                                 toggleIsFollowed={props.toggleIsFollowed}
-                                 toggleIsFetching={props.toggleIsFetching}
                                  showUserProfile={props.showUserProfile}
                                  usersAreBeingToggledFollowingStatus={props.usersAreBeingToggledFollowingStatus}
-                                 disableFollowBtn={props.disableFollowBtn}
+                                 toggleIsFollowed = {props.toggleIsFollowed}
                     />
                 })
             }

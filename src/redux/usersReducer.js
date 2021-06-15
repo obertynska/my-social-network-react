@@ -1,3 +1,5 @@
+import {followAPI, usersAPI} from "../API/api";
+
 const
     TOGGLE_IS_FOLLOWED = 'TOGGLE_IS_FOLLOWED',
     PAGINATION_USERS = 'PAGINATION_USERS',
@@ -75,7 +77,7 @@ const usersReducer = (state = initialState, action) => {
 
 }
 
-export const toggleIsFollowed = (userId) => {
+export const toggleIsFollowedAC = (userId) => {
     return {
         type: TOGGLE_IS_FOLLOWED,
         userId
@@ -89,7 +91,7 @@ export const setUsers = (users, totalUsersAmount) => {
     }
 }
 
-export const setTotalUsersAmount = (totalUsersAmount) => {
+export const setTotalUsersAmount = (totalUsersAmount = 0) => {
     return {
         type: SET_TOTAL_USERS_AMOUNT,
         totalUsersAmount
@@ -124,5 +126,34 @@ export const showUserProfile = (userId) => {
         userId
     }
 }
+
+export const getUsers = (currentPage, usersPerPage) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true))
+
+        usersAPI.getUsers(currentPage, usersPerPage)
+            .then(data => {
+                dispatch(setUsers(data.items))
+                dispatch(setTotalUsersAmount(data.totalCount))
+                dispatch(toggleIsFetching(false))
+            })
+    }
+}
+
+export const toggleIsFollowed = (userId, isFollowed) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true))
+        dispatch(disableFollowBtn(true, userId))
+        followAPI.toggleIsFollowed(userId, isFollowed ? 'unfollow' : 'follow')
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(toggleIsFollowedAC(userId))
+                    dispatch(toggleIsFetching(false))
+                }
+                dispatch(disableFollowBtn(false, userId))
+            })
+    }
+}
+
 
 export default usersReducer

@@ -1,41 +1,25 @@
 import {connect} from "react-redux";
 import {
-    toggleIsFollowed,
-    setUsers,
-    setTotalUsersAmount,
     paginate,
-    toggleIsFetching, showUserProfile, disableFollowBtn
+    showUserProfile,
+    getUsers, toggleIsFollowed
 } from "../../redux/usersReducer";
 
 import React from "react";
 import Users from "./Users";
-import {usersAPI} from "../../API/api";
 
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
         if (this.props.usersList.length === 0) {
-            this.props.toggleIsFetching(true)
-
-            usersAPI.getUsers(this.props.currentPage, this.props.usersPerPage)
-                .then(data => {
-                    this.props.setUsers(data.items)
-                    this.props.setTotalUsersAmount(data.totalCount)
-                    this.props.toggleIsFetching(false)
-                })
+            this.props.getUsers(this.props.currentPage, this.props.usersPerPage)
         }
     }
 
     onPaginationPageChange = (pageNumber) => {
-        this.props.toggleIsFetching(true)
         this.props.paginate(pageNumber);
-
-        usersAPI.getUsers(pageNumber, this.props.usersPerPage)
-            .then(data => {
-                this.props.setUsers(data.items)
-                this.props.toggleIsFetching(false)
-            })
+        this.props.getUsers(pageNumber, this.props.usersPerPage)
     }
 
     render() {
@@ -57,15 +41,11 @@ const mapStateToProps = (state) => {
     }
 }
 
-const actionCreators = {
-    toggleIsFollowed,
-    setUsers,
-    setTotalUsersAmount,
-    paginate,
-    toggleIsFetching,
-    showUserProfile,
-    disableFollowBtn
-}
 
-
-export default connect(mapStateToProps, actionCreators)(UsersContainer)
+export default connect(mapStateToProps,
+    {
+        paginate,
+        showUserProfile,
+        getUsers,
+        toggleIsFollowed
+    })(UsersContainer)

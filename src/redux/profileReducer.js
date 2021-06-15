@@ -1,3 +1,5 @@
+import {profileAPI} from "../API/api";
+
 const ADD_POST = 'ADD_POST',
     UPDATE_NEW_POST_CURRENT_MESSAGE = 'UPDATE_NEW_POST_CURRENT_MESSAGE',
     REMOVE_POST = 'REMOVE_POST',
@@ -99,6 +101,18 @@ export const toggleIsFetching = (isFetching) => {
     return {
         type: TOGGLE_IS_FETCHING,
         isFetching
+    }
+}
+
+export const getProfileInfo = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true))
+        profileAPI.getProfileInfo(userId)
+            .then(data => {
+                dispatch(setUserProfileInfo(data))
+                dispatch(toggleIsFetching(false))
+            })
+
     }
 }
 

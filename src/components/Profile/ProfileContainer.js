@@ -2,22 +2,16 @@ import {connect} from "react-redux";
 import React from "react"
 import {withRouter} from "react-router-dom";
 import Profile from "./Profile";
-import {setUserProfileInfo, toggleIsFetching} from "../../redux/profileReducer";
+import {getProfileInfo, setUserProfileInfo, toggleIsFetching} from "../../redux/profileReducer";
 import {profileAPI} from "../../API/api";
 
 
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
-        debugger;
         let userid = this.props.match.params.userId || this.props.loginedUserId || 2;
 
-        this.props.toggleIsFetching(true)
-        profileAPI.getProfileInfo(userid)
-            .then(data => {
-                this.props.setUserProfileInfo(data)
-                this.props.toggleIsFetching(false)
-            })
+        this.props.getProfileInfo(userid)
     }
 
     render() {
@@ -42,7 +36,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     toggleIsFetching,
-    setUserProfileInfo
+    setUserProfileInfo,
+    getProfileInfo
 }
 
 const ProfileWithUrlIfoContainer = withRouter(ProfileContainer)
