@@ -7,6 +7,8 @@ import {
 
 import React from "react";
 import Users from "./Users";
+import withAuthRedirect from "../../HOC/withAuthRedirect";
+import {compose} from "redux"
 
 
 class UsersContainer extends React.Component {
@@ -41,11 +43,13 @@ const mapStateToProps = (state) => {
     }
 }
 
-
-export default connect(mapStateToProps,
-    {
-        paginate,
-        showUserProfile,
-        getUsers,
-        toggleIsFollowed
-    })(UsersContainer)
+export default compose(
+    connect(mapStateToProps,
+        {
+            paginate,
+            showUserProfile,
+            getUsers,
+            toggleIsFollowed
+        }),
+    withAuthRedirect
+)(UsersContainer)

@@ -4,7 +4,8 @@ const ADD_POST = 'ADD_POST',
     UPDATE_NEW_POST_CURRENT_MESSAGE = 'UPDATE_NEW_POST_CURRENT_MESSAGE',
     REMOVE_POST = 'REMOVE_POST',
     SET_USER_PROFILE_INFO = 'SET_USER_PROFILE_INFO',
-    TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+    TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING',
+    SET_USER_STATUS = 'SET_USER_STATUS'
 
 let initialState = {
     posts: [
@@ -32,7 +33,8 @@ let initialState = {
     ],
     newPostCurrentMessage: '',
     isFetching: false,
-    userProfileInfo: null
+    userProfileInfo: null,
+    userStatus: ''
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -74,6 +76,11 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 userProfileInfo: {...action.userProfileInfo}
             }
+        case SET_USER_STATUS:
+            return {
+                ...state,
+                userStatus: action.status
+            }
         default :
             return state;
     }
@@ -91,7 +98,7 @@ export const removePost = (removedId) => ({
 })
 
 export const setUserProfileInfo = (userProfileInfo) => {
-    return {
+     return {
         type: SET_USER_PROFILE_INFO,
         userProfileInfo
     }
@@ -115,5 +122,36 @@ export const getProfileInfo = (userId) => {
 
     }
 }
+
+
+export const setUserStatus = (status) => {
+    return {
+        type: SET_USER_STATUS,
+        status
+    }
+}
+
+
+export const getUserStatus = userId => dispatch => {
+    dispatch(toggleIsFetching(true))
+    profileAPI.getUserStatus(userId)
+        .then(data => {
+            dispatch(setUserStatus(data))
+            dispatch(toggleIsFetching(false))
+        })
+}
+
+
+export const updateUserStatus = newStatus => dispatch => {
+    dispatch(toggleIsFetching(true))
+    profileAPI.updateUserStatus(newStatus)
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(setUserStatus(newStatus))
+                dispatch(toggleIsFetching(false))
+            }
+        })
+}
+
 
 export default profileReducer

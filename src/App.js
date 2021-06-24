@@ -9,6 +9,7 @@ import UsersContainer from "./components/Users/UsersContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 
 
@@ -28,6 +29,8 @@ function App(){
                            render={() => <div><h2>MY Friends</h2><Link to="/users">Show all users</Link> </div>}/>
                     <Route exact path='/users'
                            render={() => <UsersContainer/>}/>
+                    <Route exact path='/login'
+                           render={() => <Login/>}/>
                 </div>
             </div>
         </Router>

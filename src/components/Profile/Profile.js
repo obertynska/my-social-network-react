@@ -11,7 +11,7 @@ const Profile = (props) => {
         <div className={s.content}>
             {props.isFetching ? <Preloader/> : null}
             <div className={s.content__image}></div>
-            <UserInfo userInfo={props.userProfileInfo}/>
+            <UserInfo userInfo={props.userProfileInfo} updateUserStatus={props.updateUserStatus} userStatus={props.userStatus}/>
             <PostsContainer/>
         </div>
     )
