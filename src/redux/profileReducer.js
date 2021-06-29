@@ -1,11 +1,12 @@
 import {profileAPI} from "../API/api";
 
 const ADD_POST = 'ADD_POST',
-    UPDATE_NEW_POST_CURRENT_MESSAGE = 'UPDATE_NEW_POST_CURRENT_MESSAGE',
     REMOVE_POST = 'REMOVE_POST',
     SET_USER_PROFILE_INFO = 'SET_USER_PROFILE_INFO',
     TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING',
-    SET_USER_STATUS = 'SET_USER_STATUS'
+    SET_USER_STATUS = 'SET_USER_STATUS',
+    ADD_lIKE = 'ADD_lIKE',
+    REMOVE_lIKE = 'REMOVE_lIKE'
 
 let initialState = {
     posts: [
@@ -14,24 +15,27 @@ let initialState = {
             message: 'hello! it is my first post',
             date: '15 May, 12:55',
             userName: 'Iryna O',
-            likes: 55
+            likes: 55,
+            isLiked: false
         },
         {
             id: 2,
             message: 'second post',
             date: '16 May, 12:56',
             userName: 'Iryna O',
-            likes: 5
+            likes: 5,
+            isLiked: false
         },
         {
             id: 3,
             message: '3d post',
             date: '17 May, 12:57',
             userName: 'Iryna O',
-            likes: 10
+            likes: 10,
+            isLiked: false
         }
     ],
-    newPostCurrentMessage: '',
+
     isFetching: false,
     userProfileInfo: null,
     userStatus: ''
@@ -43,22 +47,16 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST:
             let newPost = {
                 id: 4,
-                message: state.newPostCurrentMessage,
-                date: '14 May, 12:57',
+                message: action.postText,
+                date: action.date,
                 userName: 'Iryna O',
-                likes: 150
+                likes: 0,
+                isLiked: false
             }
 
             return {
                 ...state,
-                posts: [...state.posts, newPost],
-                newPostCurrentMessage: ''
-            }
-
-        case UPDATE_NEW_POST_CURRENT_MESSAGE:
-            return {
-                ...state,
-                newPostCurrentMessage: action.message
+                posts: [...state.posts, newPost]
             }
 
         case REMOVE_POST:
@@ -81,24 +79,63 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 userStatus: action.status
             }
+        case ADD_lIKE:
+            return {
+                ...state,
+                posts: state.posts.map(post => {
+                    if (post.id === action.postId) {
+                       return {
+                                ...post,
+                                likes: post.likes + 1,
+                                isLiked: true
+                            }
+                    }
+                    return post
+                })
+            }
+        case REMOVE_lIKE:
+            return {
+                ...state,
+                posts: state.posts.map(post => {
+                    if (post.id === action.postId) {
+                        return {
+                            ...post,
+                            likes: post.likes - 1,
+                            isLiked: false
+                        }
+                    }
+                    return post
+                })
+            }
         default :
             return state;
     }
 }
 
 
-export const addPost = () => ({type: ADD_POST})
-export const updateNewPostCurrentMessage = (postMessage) => ({
-    type: UPDATE_NEW_POST_CURRENT_MESSAGE,
-    message: postMessage
-})
-export const removePost = (removedId) => ({
-    type: REMOVE_POST,
-    removedId: removedId
+export const addPost = (postText) => ({
+    type: ADD_POST,
+    postText,
+    date: new Date().toUTCString()
 })
 
+
+export const removePost = (removedId) => ({
+    type: REMOVE_POST,
+    removedId
+})
+
+export const addLike = (postId) => ({
+    type: ADD_lIKE,
+    postId
+})
+
+export const removeLike = (postId) => ({
+    type: REMOVE_lIKE,
+    postId
+})
 export const setUserProfileInfo = (userProfileInfo) => {
-     return {
+    return {
         type: SET_USER_PROFILE_INFO,
         userProfileInfo
     }

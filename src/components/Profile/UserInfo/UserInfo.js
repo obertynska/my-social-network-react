@@ -1,10 +1,10 @@
 import s from './UserInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import userImg from "../../../images/user.png"
-import UserStatus from "./UserStatus/UserStatus";
+import UserStatusContainer from "./UserStatus/UserStatus";
 
 
-const UserInfo = ({userInfo, updateUserStatus, userStatus}) => {
+const UserInfo = ({userInfo, userId}) => {
 
     if (!userInfo) {
         return <Preloader/>
@@ -20,7 +20,7 @@ const UserInfo = ({userInfo, updateUserStatus, userStatus}) => {
                     alt="user-image"/>
             </div>
             <h3 className={s.user_name}>{userInfo.fullName}</h3>
-            <UserStatus updateUserStatus={updateUserStatus} userStatus={userStatus}/>
+            <UserStatusContainer userId={userId}/>
             <div className={s.user_info__data}>
                 <p><span>About me:</span> {userInfo.aboutMe ? userInfo.aboutMe : 'no information yet 😦'}</p>
                 <p><span>My instagram:</span> {userInfo.contacts.instagram? userInfo.contacts.instagram : 'no information yet 😦' }</p>

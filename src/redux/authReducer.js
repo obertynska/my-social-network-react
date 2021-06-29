@@ -1,7 +1,9 @@
 import {authAPI} from "../API/api";
+import {Redirect} from "react-router-dom";
 
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA',
-    TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+    TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING',
+    SET_AUTH_USER_ID = 'SET_AUTH_USER_ID'
 
 let initialState = {
     userid: null,
@@ -19,6 +21,12 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.userAuthData,
+                isAuthorised: true,
+            }
+        case SET_AUTH_USER_ID:
+            return {
+                ...state,
+                userid: action.userId,
                 isAuthorised: true,
             }
         case TOGGLE_IS_FETCHING:
@@ -49,6 +57,11 @@ export const toggleIsFetching = (isFetching) => {
     }
 }
 
+const setAuthUserId = (userId) => ({
+    type: SET_AUTH_USER_ID,
+    userId
+})
+
 export const userAuthentication = () => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true))
@@ -63,6 +76,18 @@ export const userAuthentication = () => {
 
             })
     }
+}
+
+export const login = (formData) =>  (dispatch) => {
+    dispatch(toggleIsFetching(true))
+    authAPI.login(formData)
+        .then(data => {
+            if (data.resultCode === 0) {
+                setAuthUserId(data.userId)
+                dispatch(toggleIsFetching(false))
+            }
+
+        })
 }
 
 export default authReducer

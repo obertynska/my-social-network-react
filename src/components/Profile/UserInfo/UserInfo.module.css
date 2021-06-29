@@ -23,3 +23,9 @@
 .user_info__data span{
     font-weight: bold;
 }
+
+.statusText{
+    text-align: center;
+    font-style: italic;
+    padding: 5px 0;
+}

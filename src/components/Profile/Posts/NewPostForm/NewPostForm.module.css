@@ -35,17 +35,22 @@
     text-transform: uppercase;
     text-align: center;
     letter-spacing: 3px;
-    color: #524f4e;
+    color: #ff4040;
     background: white;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+    box-shadow: 0 15px 20px rgba(255,64,64, .4);
     transition: .3s;
     border-color: transparent;
 }
-.floating_button:hover {
+.floating_button:disabled{
+    color: #524f4e;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+}
+
+.floating_button:hover:not([disabled]) {
     background: #ff4040;
-    box-shadow: 0 15px 20px rgba(255,64,64, .4);
     color: white;
     transform: translateY(-7px);
+    cursor: pointer;
 }
 
 .new_post textarea:focus + .floating_button{

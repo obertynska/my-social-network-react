@@ -4,20 +4,16 @@ import {withRouter} from "react-router-dom";
 import Profile from "./Profile";
 import {
     getProfileInfo,
-    getUserStatus,
     setUserProfileInfo,
-    toggleIsFetching,
-    updateUserStatus
+    toggleIsFetching
 } from "../../redux/profileReducer";
 import {compose} from "redux"
-import withAuthRedirect from "../../HOC/withAuthRedirect";
 
 
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
         let userid = this.props.match.params.userId || this.props.loginedUserId || 17511;
-        this.props.getUserStatus(userid)
         this.props.getProfileInfo(userid)
     }
 
@@ -26,8 +22,7 @@ class ProfileContainer extends React.Component {
             <Profile
                 isFetching={this.props.isFetching}
                 userProfileInfo={this.props.userProfileInfo}
-                updateUserStatus={this.props.updateUserStatus}
-                userStatus={this.props.userStatus}
+                userId = {this.props.match.params.userId || this.props.loginedUserId || 17511}
             />
         )
     }
@@ -39,17 +34,14 @@ const mapStateToProps = (state) => {
         isFetching: state.profileData.isFetching,
         userProfileInfo: state.profileData.userProfileInfo,
         showedProfileId: state.usersData.showedProfileId,
-        loginedUserId: state.authData.userid,
-        userStatus: state.profileData.userStatus
+        loginedUserId: state.authData.userid
     }
 }
 
 const mapDispatchToProps = {
     toggleIsFetching,
     setUserProfileInfo,
-    getProfileInfo,
-    getUserStatus,
-    updateUserStatus
+    getProfileInfo
 }
 
 export default compose(

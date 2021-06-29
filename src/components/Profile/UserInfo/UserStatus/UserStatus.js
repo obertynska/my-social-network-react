@@ -1,4 +1,11 @@
 import React from "react";
+import {connect} from "react-redux";
+import {
+    getUserStatus,
+    updateUserStatus
+} from "../../../../redux/profileReducer";
+import s from "./../UserInfo.module.css"
+
 
 class UserStatus extends React.Component {
 
@@ -37,6 +44,10 @@ class UserStatus extends React.Component {
         event.target.select();
     }
 
+    componentDidMount() {
+        this.props.getUserStatus(this.props.userId)
+    }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps.userStatus !== this.props.userStatus){
             this.setState({
@@ -45,6 +56,7 @@ class UserStatus extends React.Component {
         }
     }
 
+
     render() {
         return (
             <div>
@@ -52,7 +64,7 @@ class UserStatus extends React.Component {
                     ?
                     <input type="text" value={this.state.currentStatusValue} autoFocus={true} onFocus={this.handleFocus}
                            onBlur={this.turnOffEditMode} onChange={this.handleStatusChanges}/>
-                    : <p style={{textAlign: "center"}}
+                    :<p className={s.statusText} style={{textAlign: "center"}}
                          onDoubleClick={this.turnOnEditMode}>{this.props.userStatus || '--- no status yet ---'}</p>
                 }
             </div>
@@ -61,4 +73,16 @@ class UserStatus extends React.Component {
 
 }
 
-export default UserStatus
+let mapStateToProps = (state) => {
+    return {
+        userStatus: state.profileData.userStatus
+    }
+}
+
+
+const mapDispatchToProps = {
+      getUserStatus,
+      updateUserStatus
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserStatus)

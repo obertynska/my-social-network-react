@@ -1,6 +1,6 @@
 import s from './Post.module.css'
 
-const Post = ({date, postText, likesCount, userName, id, removePost}) => {
+const Post = ({date, postText, likesCount, userName, id, removePost, isLiked, addLike, removeLike}) => {
 
     return (
         <div className={s.post_item} >
@@ -18,7 +18,11 @@ const Post = ({date, postText, likesCount, userName, id, removePost}) => {
             <div className="post_item_text">{postText} </div>
             <div className={s.likes_block}>
                 <div className={s.likesCount}>{likesCount}</div>
-                <div className={s.like_new}>Love it!</div>
+                {isLiked
+                    ? <div className={`${s.like_new} ${s.like_new__disactive}`} onClick={()=>{removeLike(id)}}>Love it!</div>
+                    : <div className={s.like_new} onClick={()=>{addLike(id)}}>Love it!</div>
+
+                }
             </div>
 
         </div>
