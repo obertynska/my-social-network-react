@@ -2,16 +2,21 @@ import s from './Header.module.css'
 import Logo from '../../images/logo.png'
 import {Link} from "react-router-dom";
 
-const Header = ({userid,login, email,isAuthorised}) => {
+const Header = ({userid, login, logout, isAuthorised}) => {
 
-    return(
+    return (
         <header className={s.header}>
             <img
                 src={Logo}
                 alt="logo"/>
             <h1>My social network</h1>
             <div className={s.loginBlock}>
-                {isAuthorised ? login : <Link to={'/login'} >Log in</Link> }
+                {isAuthorised
+                    ? <>
+                        <Link to={`/profile/${userid}`} className={s.loginName}>{login}</Link>
+                        <span onClick={logout} className={s.logoutBtn}></span>
+                      </>
+                    : <Link to={'/login'} className={s.loginBtn}>Log in</Link>}
             </div>
 
         </header>

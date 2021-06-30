@@ -6,7 +6,6 @@ const
     SET_USERS = 'SET_USERS',
     SET_TOTAL_USERS_AMOUNT = 'SET_TOTAL_USERS_AMOUNT',
     TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING',
-    SET_ID_SHOWED_PROFILE = 'SET_ID_SHOWED_PROFILE',
     TOGGLE_DISABLE_FOLLOWING_BTN = 'DISABLED_FOLLOWING_BTN'
 
 
@@ -18,7 +17,7 @@ let initialState = {
     pages: 6,
     isFetching: false,
     usersAreBeingToggledFollowingStatus: [],
-    showedProfileId: 2
+
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -57,11 +56,7 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 isFetching: action.isFetching
             }
-        case SET_ID_SHOWED_PROFILE:
-            return {
-                ...state,
-                showedProfileId: action.userId
-            }
+
         case TOGGLE_DISABLE_FOLLOWING_BTN:
             return {
                 ...state,
@@ -120,12 +115,7 @@ export const disableFollowBtn = (isFetching, userId) => {
     }
 }
 
-export const showUserProfile = (userId) => {
-    return {
-        type: SET_ID_SHOWED_PROFILE,
-        userId
-    }
-}
+
 
 export const getUsers = (currentPage, usersPerPage) => {
     return (dispatch) => {

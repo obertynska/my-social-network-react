@@ -17,12 +17,11 @@ const NewPostForm = ({newPostCurrentMessage, handleSubmit, pristine, submitting}
     )
 }
 
-const onSubmit = resetFields('newPost');
 
 const NewPostReduxForm =  reduxForm({
     form: 'newPost',
     touchOnBlur: false,
-    onSubmitSuccess: onSubmit
+    onSubmitSuccess: resetFields('newPost')
 })(NewPostForm)
 
 export default NewPostReduxForm

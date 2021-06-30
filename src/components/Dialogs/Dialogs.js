@@ -68,12 +68,10 @@ const NewMessageForm = ({handleSubmit, pristine, submitting}) => {
     )
 }
 
-const onSubmit = resetFields('newMessage');
-
 const NewMessageReduxForm = reduxForm({
     form: 'newMessage',
     touchOnBlur: false,
-    onSubmitSuccess: onSubmit
+    onSubmitSuccess: resetFields('newMessage')
 })(NewMessageForm)
 
 export default Dialogs;

@@ -47,7 +47,6 @@ export default compose(
     connect(mapStateToProps,
         {
             paginate,
-            showUserProfile,
             getUsers,
             toggleIsFollowed
         }),

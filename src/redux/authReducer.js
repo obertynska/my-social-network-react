@@ -1,5 +1,6 @@
 import {authAPI} from "../API/api";
 import {Redirect} from "react-router-dom";
+import {stopSubmit} from "redux-form";
 
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA',
     TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING',
@@ -20,15 +21,9 @@ const authReducer = (state = initialState, action) => {
         case SET_AUTH_USER_DATA:
             return {
                 ...state,
-                ...action.userAuthData,
-                isAuthorised: true,
+                ...action.userAuthData
             }
-        case SET_AUTH_USER_ID:
-            return {
-                ...state,
-                userid: action.userId,
-                isAuthorised: true,
-            }
+
         case TOGGLE_IS_FETCHING:
             return {
                 ...state,
@@ -39,13 +34,14 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-export const setAuthUserData = (userid, login, email) => {
+export const setAuthUserData = (userid, login, email, isAuthorised) => {
     return {
         type: SET_AUTH_USER_DATA,
         userAuthData: {
             userid,
             login,
-            email
+            email,
+            isAuthorised
         }
     }
 }
@@ -57,10 +53,6 @@ export const toggleIsFetching = (isFetching) => {
     }
 }
 
-const setAuthUserId = (userId) => ({
-    type: SET_AUTH_USER_ID,
-    userId
-})
 
 export const userAuthentication = () => {
     return (dispatch) => {
@@ -69,11 +61,9 @@ export const userAuthentication = () => {
             .then(data => {
                 if (data.resultCode === 0) {
                     let {id, login, email} = data.data;
-                    dispatch(setAuthUserData(id, login, email))
+                    dispatch(setAuthUserData(id, login, email, true))
                 }
                 dispatch(toggleIsFetching(false))
-
-
             })
     }
 }
@@ -83,7 +73,23 @@ export const login = (formData) =>  (dispatch) => {
     authAPI.login(formData)
         .then(data => {
             if (data.resultCode === 0) {
-                setAuthUserId(data.userId)
+               dispatch( userAuthentication() )
+            }else{
+                let message = data.messages.length > 0 ? data.messages[0] : "Email or pwd is wrong."
+                let action = stopSubmit('login', { _error: message})
+                dispatch(action)
+                dispatch(toggleIsFetching(false))
+            }
+
+        })
+}
+
+export const logout = () =>  (dispatch) => {
+    dispatch(toggleIsFetching(true))
+    authAPI.logout()
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(setAuthUserData(null, null, null, false))
                 dispatch(toggleIsFetching(false))
             }
 

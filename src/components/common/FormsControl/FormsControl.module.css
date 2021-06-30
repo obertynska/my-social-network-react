@@ -1,11 +1,11 @@
-.errorBlock{
-    padding-top: 10px;
-}
-
 .errorBlock span {
     color: #ff4040;
 }
 
 textarea.error {
-    border: 1px solid #ff4040;
+    border: 1px solid #ff4040!important;
+}
+
+input.error {
+    border-color:  #ff4040!important;
 }

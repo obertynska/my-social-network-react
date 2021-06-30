@@ -20,6 +20,37 @@
 }
 
 .header .loginBlock{
-    align-self: center;
+    display: flex;
+    align-items: center;
     padding-right: 10px;
+}
+
+.loginName{
+    display: inline-block;
+    padding: 7px 20px;
+    border-radius: 20px;
+    background-color: lightsteelblue;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+.loginBtn{
+    display: inline-block;
+    padding: 7px 20px;
+    border-radius: 20px;
+    background-color: #ff4040;
+    color:white;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.logoutBtn{
+    width:30px;
+    height:30px;
+    background: url("./../../images/logout.png") no-repeat center;
+    background-size: cover;
+    display: inline-block;
+    margin-left: 10px;
+    cursor: pointer;
 }

@@ -13,7 +13,7 @@ let initialState = {
         {
             id: 1,
             message: 'hello! it is my first post',
-            date: '15 May, 12:55',
+            date: 'Tue, 15 May 2021 10:58:15 GMT',
             userName: 'Iryna O',
             likes: 55,
             isLiked: false
@@ -21,7 +21,7 @@ let initialState = {
         {
             id: 2,
             message: 'second post',
-            date: '16 May, 12:56',
+            date: 'Wed, 16 May 2021 11:50:44 GMT',
             userName: 'Iryna O',
             likes: 5,
             isLiked: false
@@ -29,7 +29,7 @@ let initialState = {
         {
             id: 3,
             message: '3d post',
-            date: '17 May, 12:57',
+            date: 'Wed, 17 May 2021 12:02:12 GMT',
             userName: 'Iryna O',
             likes: 10,
             isLiked: false
@@ -46,7 +46,7 @@ const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
-                id: 4,
+                id: state.posts[state.posts.length - 1].id + 1,
                 message: action.postText,
                 date: action.date,
                 userName: 'Iryna O',
