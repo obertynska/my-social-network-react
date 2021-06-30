@@ -1,6 +1,7 @@
 import s from './Navbar.module.css'
 import {NavLink} from "react-router-dom"
 import FriendsListContainer from "./FriendsList/FriendsListContainer";
+import {connect} from "react-redux";
 
 const Navbar = () => {
 
@@ -26,11 +27,11 @@ const Navbar = () => {
                     <NavLink to="/">Settings <img src="/setting.png" alt="setting" className={s.settings_img}/></NavLink>
                 </li>
             </ul>
+
             <FriendsListContainer/>
 
         </nav>
     )
 }
-
 
 export default Navbar

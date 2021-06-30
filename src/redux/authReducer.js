@@ -57,7 +57,7 @@ export const toggleIsFetching = (isFetching) => {
 export const userAuthentication = () => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true))
-        authAPI.auth()
+       return authAPI.auth()
             .then(data => {
                 if (data.resultCode === 0) {
                     let {id, login, email} = data.data;

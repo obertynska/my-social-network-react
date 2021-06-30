@@ -1,14 +1,10 @@
 import React from "react"
 import Header from "./Header";
-import {toggleIsFetching, setAuthUserData, userAuthentication, logout} from "../../redux/authReducer"
+import {toggleIsFetching, logout} from "../../redux/authReducer"
 import {connect} from "react-redux";
 
 
 class HeaderContainer extends React.Component {
-
-    componentDidMount() {
-        this.props.userAuthentication()
-    }
 
     render() {
         return (
@@ -26,8 +22,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     toggleIsFetching,
-    setAuthUserData,
-    userAuthentication,
     logout
 }
 
