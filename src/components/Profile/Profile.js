@@ -5,7 +5,6 @@ import Posts from "./Posts/Posts";
 import Preloader from "../common/Preloader/Preloader";
 
 const Profile = (props) => {
-
     return (
         <div className={s.content}>
             {props.isFetching ? <Preloader/> : null}

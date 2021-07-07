@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {connect} from "react-redux";
 import {
     getUserStatus,
@@ -6,70 +6,50 @@ import {
 } from "../../../../redux/profileReducer";
 import s from "./../UserInfo.module.css"
 
+const UserStatus = ({userStatus, getUserStatus, updateUserStatus, userId}) => {
 
-class UserStatus extends React.Component {
+    const [editMode, setEditMode] = useState(false)
+    const [currentStatusValue, setCurrentStatusValue] = useState(userStatus)
 
-    constructor(props) {
-        super(props);
+    useEffect(()=> getUserStatus(userId) , [userId])
 
-        this.state = {
-            editMode: false,
-            currentStatusValue: this.props.userStatus
-        }
+    useEffect(()=>{
+        setCurrentStatusValue(userStatus)
+        }, [userStatus])
 
+
+    let turnOnEditMode = () => {
+        setEditMode(true)
     }
 
-    turnOnEditMode = () => {
-        this.setState({
-            editMode: true
-        })
-    }
+    let turnOffEditMode = () => {
+        setEditMode(false)
 
-    turnOffEditMode = () => {
-        this.setState({
-            editMode: false
-        })
-
-        this.props.updateUserStatus(this.state.currentStatusValue);
+        updateUserStatus(currentStatusValue);
     }
 
 
-    handleStatusChanges = (event) => {
-        this.setState({
-            currentStatusValue: event.target.value
-        })
+    let handleStatusChanges = (event) => {
+        setCurrentStatusValue(event.target.value)
     }
 
-    handleFocus = (event) => {
+    let handleFocus = (event) => {
         event.target.select();
     }
 
-    componentDidMount() {
-        this.props.getUserStatus(this.props.userId)
-    }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevProps.userStatus !== this.props.userStatus){
-            this.setState({
-                currentStatusValue: this.props.userStatus
-            })
-        }
-    }
+    return (
+        <div>
+            {editMode
+                ?
+                <input type="text" value={currentStatusValue} autoFocus={true} onFocus={handleFocus}
+                       onBlur={turnOffEditMode} onChange={handleStatusChanges}/>
+                : <p className={s.statusText} style={{textAlign: "center"}}
+                     onDoubleClick={turnOnEditMode}>{userStatus || '--- no status yet ---'}</p>
+            }
+        </div>
+    )
 
-
-    render() {
-        return (
-            <div>
-                {this.state.editMode
-                    ?
-                    <input type="text" value={this.state.currentStatusValue} autoFocus={true} onFocus={this.handleFocus}
-                           onBlur={this.turnOffEditMode} onChange={this.handleStatusChanges}/>
-                    :<p className={s.statusText} style={{textAlign: "center"}}
-                         onDoubleClick={this.turnOnEditMode}>{this.props.userStatus || '--- no status yet ---'}</p>
-                }
-            </div>
-        )
-    }
 
 }
 
@@ -81,8 +61,8 @@ let mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = {
-      getUserStatus,
-      updateUserStatus
+    getUserStatus,
+    updateUserStatus
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserStatus)
